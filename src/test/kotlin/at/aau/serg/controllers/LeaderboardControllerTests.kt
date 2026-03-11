@@ -22,7 +22,7 @@ class LeaderboardControllerTests {
         controller = LeaderboardController(mockedService)
     }
 
-    // --- 1. Tests für "Kein Rang" (angepasste Original-Tests) ---
+   
 
     @Test
     fun test_getLeaderboard_correctScoreSorting() {
@@ -32,7 +32,7 @@ class LeaderboardControllerTests {
 
         whenever(mockedService.getGameResults()).thenReturn(listOf(second, first, third))
 
-        // null übergeben und ResponseEntity prüfen
+
         val response = controller.getLeaderboard(null)
 
         verify(mockedService).getGameResults()
@@ -53,7 +53,7 @@ class LeaderboardControllerTests {
 
         whenever(mockedService.getGameResults()).thenReturn(listOf(second, first, third))
 
-        // null übergeben und ResponseEntity prüfen
+
         val response = controller.getLeaderboard(null)
 
         verify(mockedService).getGameResults()
@@ -66,7 +66,7 @@ class LeaderboardControllerTests {
         assertEquals(third, res[1])
     }
 
-    // --- 2. Tests für "Rang passt" (gültige Parameter & Sublisten) ---
+
 
     @Test
     fun test_getLeaderboard_validRank_returnsCorrectSubset() {
@@ -76,7 +76,7 @@ class LeaderboardControllerTests {
         }
         whenever(mockedService.getGameResults()).thenReturn(results)
 
-        // Abfrage für Platz 5. Erwartet: Plätze 2, 3, 4, [5], 6, 7, 8 (Insgesamt 7 Elemente)
+
         val response = controller.getLeaderboard(5)
 
         assertEquals(HttpStatus.OK, response.statusCode)
@@ -106,7 +106,7 @@ class LeaderboardControllerTests {
         assertEquals("Player 4", res[3].playerName)
     }
 
-    // --- 3. Tests für "Falscher Rang" (Fehlerfälle -> HTTP 400) ---
+
 
     @Test
     fun test_getLeaderboard_invalidRankTooSmall_returnsBadRequest() {
